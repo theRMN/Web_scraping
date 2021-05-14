@@ -32,5 +32,5 @@ for article in soup.findAll('article'):
 
     a_text += [set('')]
 
-    if a_text[0] & KEYWORDS or p_text[0] & KEYWORDS or hubs & KEYWORDS :
+    if hubs & KEYWORDS or a_text[0] & KEYWORDS or p_text[0] & KEYWORDS:
         print(f'{datetime.now(tz=None)} | {title.text.strip()} | {href}')
