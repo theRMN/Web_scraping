@@ -19,8 +19,8 @@ for article in soup.findAll('article'):
     title = article.find('h2', class_='post__title')
     href = title.find('a').attrs.get('href')
 
-    x = requests.get(href)
-    d = BeautifulSoup(x.text, features='html.parser')
+    article_link = requests.get(href)
+    article_content = BeautifulSoup(article_link.text, features='html.parser')
 
     if hubs & KEYWORDS:
         print(f'{datetime.now(tz=None)} | {title.text.strip()} | {href}')
@@ -34,7 +34,7 @@ for article in soup.findAll('article'):
         print(f'{datetime.now(tz=None)} | {title.text.strip()} | {href}')
 
     a_text = [set(pattern.sub(r' ', a.text.lower()).split())
-              for a in d.findAll('div', class_='post__text_v1')]
+              for a in article_content.findAll('div', class_='post__text_v1')]
 
     a_text += [set('')]
 
